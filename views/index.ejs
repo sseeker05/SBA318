@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+  <h1>Todo List</h1>
+
+  <form class="Input-container" method="POST" action="/add-todo">
+    <input id="input-todo" type="text" name="todoName" placeholder="Enter Todo" required>
+    <button id="add-todo" type="submit">+</button>
+  </form>
+
+  <div class="todo-container">
+    <% todos.forEach(function(todo) { %>
+      <div class="todo">
+        <div class="todo-info">
+          <input type="checkbox" class="todo-completed" <%= todo.completed ? 'checked' : '' %> data-id="<%= todo.id %>">
+          <p class="todo-name"><%= todo.name %></p>
+        </div>
+        <div class="todo-btn">
+          <button class="todo-edit" data-id="<%= todo.id %>">Edit</button>
+          <button class="todo-delete" data-id="<%= todo.id %>">Delete</button>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <div class="modal-background"></div>
+
+  <div class="modal">
+    <div class="modal-top">
+      <h1>Edit Todo</h1>
+      <span class="close-modal" id="close-modal">&#x2715;</span>
+    </div>
+
+    <div class="modal-input">
+      <input type="text" id="edit-todo-name" placeholder="Enter Todo Name">
+    </div>
+    <div id="edit-todo-completed-wrapper">
+      <input type="checkbox" id="edit-todo-completed"> Completed
+    </div>
+
+    <button id="save-todo">Save</button>
+  </div>
+
+  <script src="/script.js" defer></script>
+</body>
+
+</html>

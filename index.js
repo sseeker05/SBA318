@@ -3,7 +3,11 @@ const app = express()
 const port = 3000
 const bodyParser = require('body-parser')
 const uuid = require('uuid')
+const ejs = require('ejs');
+
 app.use(express.json())
+app.use(express.static('public'));
+app.set('view engine', 'ejs')
 
 
 
@@ -20,12 +24,27 @@ const todos = [ {
  
 ]
 
-
+app.get('/', (req, res) => {
+  res.render('index',  { todos: todos });
+});
 
 
 app.get('/', (req, res) => {
   res.send('Hello World!!')
 })
+
+
+// app.get('/todos', (req, res) => {
+//   res.render('index', { todos: todos }); 
+// });
+
+
+
+
+
+
+
+
 
 app.get('/todos', (req, res) => {
   res.send(todos)
